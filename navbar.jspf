@@ -12,9 +12,13 @@
          <li class="nav-item">
           <a class="nav-link" href="register.jsp">Registro</a> 
         </li>
-         <li class="nav-item">
-          <a class="nav-link" href="homepage.jsp">homepage</a> 
+           <li class="nav-item">
+          <a class="nav-link" href="add-post.jsp">Adicionar Posts</a> 
+        </li>
+           <li class="nav-item">
+          <a class="nav-link" href="delete-posts.jsp">Remover todos os posts</a>
         </li>
       </ul>
   </div>
+      <hr>
 </nav>
