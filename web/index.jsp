@@ -23,6 +23,7 @@
         resultSet = statement.executeQuery();
         
         while (resultSet.next()) {
+            int postId = resultSet.getInt("id"); // Obtendo o ID do post
             String title = resultSet.getString("title");
             String content = resultSet.getString("content");
     %>
@@ -32,7 +33,7 @@
                 <%
                 if (content != null) {
                 %>
-                <a href="edit-post.jsp">Editar Post</a>
+                <a href="edit-post.jsp?id=<%= postId %>">Editar Post</a> <!-- Passando o ID do post como parâmetro na URL -->
                 <%
                 }
                 %>

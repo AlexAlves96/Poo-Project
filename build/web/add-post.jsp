@@ -3,10 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <%@include file="WEB-INF/jspf/html-head-libs.jspf" %>
     <meta charset="UTF-8">
     <title>Adicionar Postagem</title>
 </head>
 <body>
+     <%@include file="WEB-INF/jspf/navbar.jspf" %>
     <h1>Adicionar uma nova postagem</h1>
     
     <%

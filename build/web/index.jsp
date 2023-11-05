@@ -4,11 +4,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Visualizar Postagens</title>
+    <%@include file="WEB-INF/jspf/html-head-libs.jspf" %>
 </head>
-<body>
-    <jsp:include page="WEB-INF/jspf/header.jspf" />
-    <h1>Postagens</h1>
+<body> 
+    <jsp:include page="WEB-INF/jspf/navbar.jspf" />
     
     <%
     Connection connection = null;
@@ -24,6 +23,7 @@
         resultSet = statement.executeQuery();
         
         while (resultSet.next()) {
+            int postId = resultSet.getInt("id"); // Obtendo o ID do post
             String title = resultSet.getString("title");
             String content = resultSet.getString("content");
     %>
@@ -33,11 +33,11 @@
                 <%
                 if (content != null) {
                 %>
-                <a href="edit-post.jsp">Editar Post</a>
+                <a href="edit-post.jsp?id=<%= postId %>">Editar Post</a> <!-- Passando o ID do post como parâmetro na URL -->
                 <%
                 }
                 %>
-                <hr></hr>
+                <hr>
             </div>
     <%
         }
@@ -60,5 +60,7 @@
         }
     }
     %>
+    
+    <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
 </body>
 </html>

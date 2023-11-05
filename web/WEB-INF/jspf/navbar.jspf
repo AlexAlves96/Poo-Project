@@ -19,6 +19,7 @@
           <a class="nav-link" href="delete-posts.jsp">Remover todos os posts</a>
         </li>
       </ul>
+          <a class="nav-link" href="logout.jsp">Logout</a>
   </div>
       <hr>
 </nav>
