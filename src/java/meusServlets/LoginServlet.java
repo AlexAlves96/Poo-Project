@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -17,21 +22,31 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        // Aqui você pode adicionar a lógica de autenticação
-        // Por exemplo, verificar se o usuário e senha são válidos em um banco de dados
+        if (username != null && password != null) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+                Connection connection = DriverManager.getConnection("jdbc:sqlite:login.db");
 
-        // Se a autenticação for bem-sucedida, redirecione para uma página de boas-vindas
-        if (isValidUser(username, password)) {
-            response.sendRedirect("welcome.jsp");
-        } else {
-            // Caso contrário, redirecione de volta para a página de login com uma mensagem de erro
-            response.sendRedirect("login.jsp?error=1");
+                String query = "SELECT * FROM users WHERE username = ? AND password = ?";
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setString(1, username);
+                statement.setString(2, password);
+
+                ResultSet result = statement.executeQuery();
+
+                if (result.next()) {
+                    // Redirecionar para a página "index.jsp" após um login bem-sucedido
+                    response.sendRedirect("index.jsp");
+                } else {
+                    // Caso contrário, redirecionar de volta para a página de login com uma mensagem de erro
+                    response.sendRedirect("login.jsp?error=1");
+                }
+
+                connection.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                // Trate o erro apropriadamente
+            }
         }
-    }
-
-    private boolean isValidUser(String username, String password) {
-        // Adicione a lógica de validação do usuário aqui, por exemplo, consultando um banco de dados.
-        // Este é apenas um exemplo simples.
-        return "usuario".equals(username) && "senha".equals(password);
     }
 }
