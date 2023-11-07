@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.sql.Connection, java.sql.DriverManager, java.sql.PreparedStatement, java.sql.ResultSet, java.sql.SQLException" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,22 +19,23 @@
         <%@include file="WEB-INF/jspf/navbar.jspf" %>
         <div class="form-container">
             <div class="form-box">
-                <form class="row g-3">
+                <form class="row g-3" method="post" action="LoginServlet">
                     <div class="col-12">
                         <label for="inputUsrname" class="form-label">Usuário</label>
-                        <input type="text" class="form-control" id="inputUsrname">
+                        <input type="text" class="form-control" id="inputUsrname" name="username">
                     </div>
                     <div class="col-12">
                         <label for="inputPassword4" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="inputPassword4">
+                        <input type="password" class="form-control" id="inputPassword4" name="password">
                     </div>
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Login</button><br>
-                        <a><a href="register.jsp">Não tem uma conta? Registre-se</a>
+                        <a href="register.jsp">Não tem uma conta? Registre-se</a>
                     </div>
                 </form>
             </div>
         </div>
+
         <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
     </body>
 </html>

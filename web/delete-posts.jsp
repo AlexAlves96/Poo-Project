@@ -7,6 +7,7 @@
         <title>Excluir Todos os Posts</title>
         <%@include file="WEB-INF/jspf/html-head-libs.jspf" %>
         <%@include file="WEB-INF/jspf/css.jspf" %>
+        <%@include file="WEB-INF/jspf/scripts.jspf" %>
     </head>
     <body>
         <%@include file="WEB-INF/jspf/navbar.jspf" %>
@@ -55,19 +56,6 @@
                 </form>
             </div>
         </div>
-        <script>
-            function toggleButton() {
-                var checkbox = document.getElementById('confirmCheckbox');
-                var deleteButton = document.getElementById('deleteButton');
-
-                if (checkbox.checked) {
-                    deleteButton.removeAttribute('disabled');
-                } else {
-                    deleteButton.setAttribute('disabled', 'disabled');
-                }
-            }
-        </script>
     </body>
-
     <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
 </html>
