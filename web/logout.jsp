@@ -5,21 +5,16 @@
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.IOException"%>
+<%@ page import="javax.servlet.ServletException"%>
 
 <%
-    // Remove a variável de sessão para indicar que o usuário não está mais autenticado
-    session.removeAttribute("userAuthenticated");
-%>
+    // Invalidate the session
+    HttpSession currentSession = request.getSession(false);
+    if (currentSession != null) {
+        currentSession.invalidate();
+    }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <%@include file="WEB-INF/jspf/html-head-libs.jspf" %>
-    <meta charset="UTF-8">
-    <title>Logout</title>
-</head>
-<body>
-    <%@include file="WEB-INF/jspf/navbar.jspf" %>
-    <h1>Você foi desconectado com sucesso.</h1>
-</body>
-</html>
+    // Redirect to the login page
+    response.sendRedirect("login.jsp");
+%>

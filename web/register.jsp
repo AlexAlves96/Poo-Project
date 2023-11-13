@@ -14,7 +14,7 @@
         <%@include file="WEB-INF/jspf/css.jspf" %>
     </head>
     <body>
-        <%@include file="WEB-INF/jspf/navbar.jspf" %>
+        <jsp:include page="header.jsp" />
         <div tabindex="-1">
             <form class=" register row g-3" >
                 <div class="col-md-6">

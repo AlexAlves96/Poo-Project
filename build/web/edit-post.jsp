@@ -11,6 +11,7 @@
     <title>Editar Postagem</title>
 </head>
 <body>
+    
     <h1>Editar Postagem</h1>
     
     <%

@@ -15,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -35,17 +36,21 @@ public class LoginServlet extends HttpServlet {
                 ResultSet result = statement.executeQuery();
 
                 if (result.next()) {
-                    // Redirecionar para a página "index.jsp" após um login bem-sucedido
+                    // Set the "username" attribute in the session after a successful login
+                    HttpSession session = request.getSession();
+                    session.setAttribute("username", username);
+
+                    // Redirect to the home page (index.jsp) after a successful login
                     response.sendRedirect("index.jsp");
                 } else {
-                    // Caso contrário, redirecionar de volta para a página de login com uma mensagem de erro
+                    // Redirect back to the login page with an error message
                     response.sendRedirect("login.jsp?error=1");
                 }
 
                 connection.close();
             } catch (Exception e) {
                 e.printStackTrace();
-                // Trate o erro apropriadamente
+                // Handle the error appropriately
             }
         }
     }

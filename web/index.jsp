@@ -8,7 +8,7 @@
         <%@include file="WEB-INF/jspf/css.jspf" %>
     </head>
     <body> 
-        <jsp:include page="WEB-INF/jspf/navbar.jspf" />
+        <jsp:include page="header.jsp" />
 
         <%
             Connection connection = null;
@@ -24,19 +24,24 @@
                 resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {
-                    int postId = resultSet.getInt("id"); // Obtendo o ID do post
+                    int postId = resultSet.getInt("id");
                     String title = resultSet.getString("title");
                     String content = resultSet.getString("content");
+                    String datePublished = resultSet.getString("date_published");
+                    String author = resultSet.getString("author");
         %>
 
         <div class="index-container">
             <div class="index-content">
-                <div  class="post-title">
-                  <h2><%= title%></h2>
+                <div class="post-title">
+                  <h2><%= title %></h2>
                 </div>
-                <p><%= content%></p>
-                <% if (content != null) {%>
-                <a href="edit-post.jsp?id=<%= postId%>">Editar Post</a> <!-- Passando o ID do post como parâmetro na URL -->
+                <p>Autor: <%= author %></p>
+                <p>Data de Publicação: <%= datePublished %></p>
+                <p><%= content %></p>
+                
+                <% if (content != null) { %>
+                    <a href="edit-post.jsp?id=<%= postId %>">Editar Post</a>
                 <% } %>
                 <hr>
             </div>

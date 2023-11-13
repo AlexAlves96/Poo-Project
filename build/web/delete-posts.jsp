@@ -10,7 +10,7 @@
         <%@include file="WEB-INF/jspf/scripts.jspf" %>
     </head>
     <body>
-        <%@include file="WEB-INF/jspf/navbar.jspf" %>
+        <jsp:include page="header.jsp" />
         <h1>Excluir Todos os Posts</h1>
 
         <%
