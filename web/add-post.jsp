@@ -1,4 +1,4 @@
-<%@page import="java.sql.Connection, java.sql.PreparedStatement, java.sql.DriverManager, java.sql.SQLException"%>
+<%@page import="java.sql.Connection, java.sql.PreparedStatement, java.sql.DriverManager, java.sql.SQLException, java.text.SimpleDateFormat, java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     // Lógica Java para manipulação do banco de dados aqui
@@ -16,8 +16,13 @@
         if (request.getMethod().equalsIgnoreCase("POST")) {
             String title = request.getParameter("title");
             String content = request.getParameter("content");
-            String datePublished = request.getParameter("date_published");
-            String author = request.getParameter("author");
+            
+            // Obtem a data atual do sistema
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String datePublished = sdf.format(new Date());
+
+            // Recupera o autor da sessão
+            String author = (String) session.getAttribute("username");
 
             statement = connection.prepareStatement("INSERT INTO posts (title, content, date_published, author) VALUES (?, ?, ?, ?)");
             statement.setString(1, title);
@@ -46,7 +51,6 @@
         }
     }
 %>
-
 <!DOCTYPE html>
 <html>
     <head>
