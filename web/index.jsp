@@ -1,6 +1,8 @@
 <%@ page import="java.sql.Connection, java.sql.PreparedStatement, java.sql.DriverManager, java.sql.ResultSet, java.sql.SQLException" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -34,14 +36,17 @@
         <div class="index-container">
             <div class="index-content">
                 <div class="post-title">
-                  <h2><%= title %></h2>
+                    <div class="info-post">
+                        <p>Autor: <%= author%></p>  
+                        <p id="date-post"> Publicado em: <%= datePublished%></p>
+                    </div>
+                    <h2> <%= title%></h2>
                 </div>
-                <p>Autor: <%= author %></p>
-                <p>Data de Publicação: <%= datePublished %></p>
-                <p><%= content %></p>
-                
-                <% if (content != null) { %>
-                    <a href="edit-post.jsp?id=<%= postId %>">Editar Post</a>
+                <div class="post-content">
+                    <p><%= content%></p> 
+                </div>
+                <% if (content != null) {%>
+                <a href="edit-post.jsp?id=<%= postId%>">Editar Post</a>
                 <% } %>
                 <hr>
             </div>
@@ -68,7 +73,7 @@
                 }
             }
         %>
-
+        <%@include file="WEB-INF/jspf/scripts.jspf" %>
         <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
     </body>
 </html>

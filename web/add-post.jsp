@@ -24,8 +24,10 @@
             statement.setString(2, content);
             statement.setString(3, datePublished);
             statement.setString(4, author);
-            
+
             statement.executeUpdate();
+
+            // Redireciona para index.jsp com o novo post
             response.sendRedirect("/Projeto/index.jsp");
         }
     } catch (SQLException | ClassNotFoundException e) {
@@ -61,19 +63,17 @@
                     <div class="caixa">
                         <form class="post-form" action="add-post.jsp" method="POST">
                             <label class="form-label">Titulo:</label>
-                             <input class="form-control" type="text" name="title" id="title" required><br>
+                            <input class="form-control" type="text" name="title" id="title" required><br>
                             <label class="form-label" for="content">Conteúdo:</label>
-                            <textarea class="form-control" name="content" id="content" rows="4" required style="resize: none"></textarea><br>
-                            <label class="form-label" for="date_published">Data de Publicação:</label>
-                            <input class="form-control" type="text" name="date_published" id="date_published" required><br>
-                            <label class="form-label" for="author">Autor:</label>
-                            <input class="form-control" type="text" name="author" id="author" required><br>
-                            <input class="btn btn-primary" type="submit" value="Adicionar Postagem">
+                            <textarea class="form-control" name="content" id="content" rows="4" required style="resize: none"></textarea><br>                        
+                            <input class="btn btn-primary" id="btn-add-post" type="submit" value="Adicionar Postagem">
                         </form>
+                        <p id="date-post"></p>
                     </div>
                 </div>
             </div>
         </div>
+        <%@include file="WEB-INF/jspf/scripts.jspf" %>
         <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
     </body>
 </html>
