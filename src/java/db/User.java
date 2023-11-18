@@ -9,14 +9,11 @@
 // User.java
 package db;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.*;
-import java.time.*;
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import web.DatabaseListener;
-
 
 public class User {
 
@@ -24,20 +21,51 @@ public class User {
     private String nome;
     private String sobrenome;
     private String usuario;
-    private String senha;
+    private String password;
 
-    public static void addUser(String nome, String sobrenome, String apelido, String senha) throws Exception {
-        Connection con = DatabaseListener.getConnection();
-        PreparedStatement stmt = con.prepareStatement("INSERT INTO users (nome, sobrenome, apelido, senha)"
-                + "VALUES (?,?,?,?)");
-        stmt.setString(1, nome);
-        stmt.setString(2, sobrenome);
-        stmt.setString(3, apelido);
-        stmt.setString(4, senha);
-        stmt.execute();
-        stmt.close();
-        con.close();
+    public static void addUser(String nome, String sobrenome, String username, String password) throws SQLException, Exception {
+        try (Connection con = DatabaseListener.getConnection();
+             PreparedStatement stmt = con.prepareStatement("INSERT INTO users (nome, sobrenome, username, password) VALUES (?, ?, ?, ?)")) {
+
+            stmt.setString(1, nome);
+            stmt.setString(2, sobrenome);
+            stmt.setString(3, username);
+            stmt.setString(4, password);
+            stmt.executeUpdate();
+        }
     }
+
+    public static boolean authenticateUser(String nome, String password) throws SQLException, Exception {
+        try (Connection con = DatabaseListener.getConnection();
+             PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?")) {
+
+            stmt.setString(1, nome);
+            stmt.setString(2, password);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
+    
+    public static boolean isUsernameUnique(String nome) throws SQLException, Exception {
+        try (Connection con = DatabaseListener.getConnection();
+             PreparedStatement stmt = con.prepareStatement("SELECT COUNT(*) FROM users WHERE username = ?")) {
+
+            stmt.setString(1, nome);
+
+            try (ResultSet resultSet = stmt.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt(1);
+                    return count == 0; // Return true if count is 0 (nome is unique)
+                }
+            }
+        }
+
+        return false; // Return false by default (considering an error occurred)
+    }
+
+
+    // Getters and setters
 
     public Integer getUserid() {
         return userid;
@@ -72,27 +100,10 @@ public class User {
     }
 
     public String getSenha() {
-        return senha;
+        return password;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-    
-    
-      public static boolean authenticateUser(String username, String password) throws Exception {
-        Connection con = DatabaseListener.getConnection();
-        PreparedStatement stmt = con.prepareStatement("SELECT * FROM users WHERE apelido = ? AND senha = ?");
-        stmt.setString(1, username);
-        stmt.setString(2, password);
-        ResultSet rs = stmt.executeQuery();
-
-        boolean userFound = rs.next();
-
-        rs.close();
-        stmt.close();
-        con.close();
-
-        return userFound;
+    public void setSenha(String password) {
+        this.password = password;
     }
 }

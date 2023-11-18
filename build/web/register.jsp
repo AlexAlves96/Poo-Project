@@ -15,16 +15,23 @@
         if (request.getParameter("register") != null) {
             String nome = request.getParameter("inputName");
             String sobrenome = request.getParameter("inputLastname");
-            String apelido = request.getParameter("inputUsername");
-            String senha = request.getParameter("inputPassword");
+            String username = request.getParameter("inputUsername");
+            String password = request.getParameter("inputPassword");
 
-            User.addUser(nome, sobrenome, apelido, senha);
+            // Check if the nome already exists
+            if (User.isUsernameUnique(username)) {
+                // nome is unique, proceed with user registration
+                User.addUser(nome, sobrenome, username, password);
+            } else {
+                // nome already exists, handle the situation (e.g., display an error message)
+                execao = "O seu usuário já existe! Escolha um nome diferente.";
+            }
         }
     } catch (Exception ex) {
         execao = ex.getMessage();
     }
-
 %>
+
 
 <html>
     <head>

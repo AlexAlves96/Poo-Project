@@ -16,7 +16,7 @@ import org.sqlite.SQLiteConfig;
 public class DatabaseListener implements ServletContextListener {
 
     public static final String CLASS_NAME = "org.sqlite.JDBC";
-    public static final String URL = "jdbc:sqlite:tecblog.db";
+    public static final String URL = "jdbc:sqlite:login.db";
     public static Exception exception = null;
 
     public static Connection getConnection() throws Exception {
@@ -41,8 +41,8 @@ public class DatabaseListener implements ServletContextListener {
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "nome TEXT NOT NULL,"
                     + "sobrenome TEXT NOT NULL,"
-                    + "apelido TEXT NOT NULL UNIQUE,"
-                    + "senha TEXT NOT NULL)");
+                    + "username TEXT NOT NULL UNIQUE,"
+                    + "password TEXT NOT NULL)");
             stmt.execute("INSERT OR IGNORE INTO users VALUES(1,'Fulano', 'do Silvo', 'FS', '123')");          
         } catch (Exception ex) {
             exception = ex;
