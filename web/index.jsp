@@ -46,6 +46,7 @@
                     <p><%= content%></p> 
                 </div>
                 <% if (content != null) {%>
+                <a href="view-post.jsp?id=<%= postId%>">Ver Post Completo</a><br>
                 <a href="edit-post.jsp?id=<%= postId%>">Editar Post</a>
                 <% } %>
                 <hr>
