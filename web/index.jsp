@@ -22,7 +22,7 @@
                 connection = DriverManager.getConnection("jdbc:sqlite:database.db");
 
                 // Consulta para selecionar todos os posts
-                statement = connection.prepareStatement("SELECT * FROM posts");
+                statement = connection.prepareStatement("SELECT * FROM posts ORDER BY date_published DESC");
                 resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {
