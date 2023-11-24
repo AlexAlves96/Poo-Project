@@ -14,26 +14,32 @@
         statement.executeUpdate();
 
         if (request.getMethod().equalsIgnoreCase("POST")) {
-            String title = request.getParameter("title");
-            String content = request.getParameter("content");
-            
-            // Obtem a data atual do sistema
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String datePublished = sdf.format(new Date());
-
             // Recupera o autor da sessão
             String author = (String) session.getAttribute("username");
 
-            statement = connection.prepareStatement("INSERT INTO posts (title, content, date_published, author) VALUES (?, ?, ?, ?)");
-            statement.setString(1, title);
-            statement.setString(2, content);
-            statement.setString(3, datePublished);
-            statement.setString(4, author);
+            // Verifica se o autor é "raziel"
+            if ("raziel".equals(author)) {
+                String title = request.getParameter("title");
+                String content = request.getParameter("content");
 
-            statement.executeUpdate();
+                // Obtem a data atual do sistema
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String datePublished = sdf.format(new Date());
 
-            // Redireciona para index.jsp com o novo post
-            response.sendRedirect("/Projeto/index.jsp");
+                statement = connection.prepareStatement("INSERT INTO posts (title, content, date_published, author) VALUES (?, ?, ?, ?)");
+                statement.setString(1, title);
+                statement.setString(2, content);
+                statement.setString(3, datePublished);
+                statement.setString(4, author);
+
+                statement.executeUpdate();
+
+                // Redireciona para index.jsp com o novo post
+                response.sendRedirect("/Projeto/index.jsp");
+            } else {
+                // Define uma mensagem informando que o usuário não tem permissão para postar
+                request.setAttribute("errorMessage", "Você não tem permissão para postar.");
+            }
         }
     } catch (SQLException | ClassNotFoundException e) {
         e.printStackTrace();
@@ -65,6 +71,12 @@
             <div class="row">
                 <div class="col-12 d-flex justify-content-center align-items-center">
                     <div class="caixa">
+                        <%-- Verifica se há uma mensagem de erro definida e a exibe em uma caixa de texto --%>
+                        <c:if test="${not empty errorMessage}">
+                            <div class="alert alert-danger" role="alert">
+                                ${errorMessage}
+                            </div>
+                        </c:if>
                         <form class="post-form" action="add-post.jsp" method="POST">
                             <label class="form-label">Titulo:</label>
                             <input class="form-control" type="text" name="title" id="title" required><br>

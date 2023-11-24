@@ -31,6 +31,9 @@
                     String content = resultSet.getString("content");
                     String datePublished = resultSet.getString("date_published");
                     String author = resultSet.getString("author");
+                    
+                    // Obtém o nome do usuário da sessão
+                    String sessionUsername = (String) session.getAttribute("username");
         %>
 
         <div class="index-container">
@@ -46,8 +49,12 @@
                     <p><%= content%></p> 
                 </div>
                 <% if (content != null) {%>
-                <a href="view-post.jsp?id=<%= postId%>">Ver Post Completo</a><br>
-                <a href="edit-post.jsp?id=<%= postId%>">Editar Post</a>
+                    <a href="view-post.jsp?id=<%= postId%>">Ver Post Completo</a><br>
+                    
+                    <%-- Verifica se o autor é "raziel" ou se o usuário da sessão é "raziel" antes de mostrar o link "Editar Post" --%>
+                    <% if ("raziel".equals(sessionUsername)) { %>
+                        <a href="edit-post.jsp?id=<%= postId%>">Editar Post</a>
+                    <% } %>
                 <% } %>
                 <hr>
             </div>
