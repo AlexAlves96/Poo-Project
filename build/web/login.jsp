@@ -16,7 +16,7 @@
         <%@include file="WEB-INF/jspf/css.jspf" %>
     </head>
     <body>
-        <jsp:include page="header.jsp" />
+         <%@include file="WEB-INF/jspf/navbar.jspf" %>
         <div class="form-container">
             <div class="form-box">
                 <form class="row g-3" method="post" action="LoginServlet">

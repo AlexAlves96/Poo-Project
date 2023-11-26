@@ -40,7 +40,7 @@
         <%@include file="WEB-INF/jspf/css.jspf" %>
     </head>
     <body>
-        <jsp:include page="header.jsp" /> 
+         <%@include file="WEB-INF/jspf/navbar.jspf" %>
         <div tabindex="-1">
             <h1> <% out.print(execao);%></h1>
             <form class=" register row g-3" method="post">

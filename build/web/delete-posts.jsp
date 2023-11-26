@@ -5,12 +5,12 @@
     <head>
         <meta charset="UTF-8">
         <title>Excluir Todos os Posts</title>
-        <%@include file="WEB-INF/jspf/html-head-libs.jspf" %>
         <%@include file="WEB-INF/jspf/css.jspf" %>
-        <%@include file="WEB-INF/jspf/scripts.jspf" %>
+
+
     </head>
     <body>
-        <jsp:include page="header.jsp" />
+        <%@include file="WEB-INF/jspf/navbar.jspf" %>
         <h1>Excluir Todos os Posts</h1>
 
         <%
@@ -56,6 +56,6 @@
                 </form>
             </div>
         </div>
+        <%@include file="WEB-INF/jspf/scripts.jspf" %>
     </body>
-    <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
 </html>

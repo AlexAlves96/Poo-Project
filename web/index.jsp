@@ -9,8 +9,9 @@
         <%@include file="WEB-INF/jspf/html-head-libs.jspf" %>
         <%@include file="WEB-INF/jspf/css.jspf" %>
     </head>
+    
     <body> 
-        <jsp:include page="header.jsp" />
+         <%@include file="WEB-INF/jspf/navbar.jspf" %>
 
         <%
             Connection connection = null;
@@ -22,7 +23,7 @@
                 connection = DriverManager.getConnection("jdbc:sqlite:database.db");
 
                 // Consulta para selecionar todos os posts
-                statement = connection.prepareStatement("SELECT * FROM posts ORDER BY date_published DESC");
+                statement = connection.prepareStatement("SELECT * FROM posts");
                 resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {
@@ -31,9 +32,6 @@
                     String content = resultSet.getString("content");
                     String datePublished = resultSet.getString("date_published");
                     String author = resultSet.getString("author");
-                    
-                    // Obtém o nome do usuário da sessão
-                    String sessionUsername = (String) session.getAttribute("username");
         %>
 
         <div class="index-container">
@@ -49,12 +47,7 @@
                     <p><%= content%></p> 
                 </div>
                 <% if (content != null) {%>
-                    <a href="view-post.jsp?id=<%= postId%>">Ver Post Completo</a><br>
-                    
-                    <%-- Verifica se o autor é "raziel" ou se o usuário da sessão é "raziel" antes de mostrar o link "Editar Post" --%>
-                    <% if ("raziel".equals(sessionUsername)) { %>
-                        <a href="edit-post.jsp?id=<%= postId%>">Editar Post</a>
-                    <% } %>
+                <a href="edit-post.jsp?id=<%= postId%>">Editar Post</a>
                 <% } %>
                 <hr>
             </div>
@@ -82,6 +75,5 @@
             }
         %>
         <%@include file="WEB-INF/jspf/scripts.jspf" %>
-        <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
     </body>
 </html>

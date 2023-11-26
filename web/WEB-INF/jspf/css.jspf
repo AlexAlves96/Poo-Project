@@ -2,10 +2,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 <style>
     body {
-        background-color: #f3f3f3;
+        background-color: #4173ff;
         text-align: center;
     }
-
+    
+    .navDim{
+         background-color: #1b4b71;
+    }
     /*add-post.jsp */
     .container {
         display: flex;
@@ -144,16 +147,35 @@
         width: 100%;
         height: 40px;
         margin-bottom: 10px;
-      
+
     }
-    
+
     .info-post{
         display: flex;
         justify-content: space-between;
     }
-    
+
     .post-content {
-    /* Estilos para a área de conteúdo */
-    padding-top: 50px; /* Ajuste conforme necessário */
-}
+        /* Estilos para a área de conteúdo */
+        padding-top: 50px; /* Ajuste conforme necessário */
+    }
+
+    /* edit-post.jsp */
+    .custom-box {
+        width: 400px;
+        padding: 20px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 0 auto; /* Adicione esta linha para centralizar horizontalmente */
+        margin-top: 10vh; /* Adicione esta linha para centralizar verticalmente */
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: left;
+
+    }
+
+    .box-edit{
+        resize: none;
+    }
 </style>

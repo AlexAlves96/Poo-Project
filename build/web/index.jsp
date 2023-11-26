@@ -9,8 +9,9 @@
         <%@include file="WEB-INF/jspf/html-head-libs.jspf" %>
         <%@include file="WEB-INF/jspf/css.jspf" %>
     </head>
+    
     <body> 
-        <jsp:include page="header.jsp" />
+         <%@include file="WEB-INF/jspf/navbar.jspf" %>
 
         <%
             Connection connection = null;
@@ -74,6 +75,5 @@
             }
         %>
         <%@include file="WEB-INF/jspf/scripts.jspf" %>
-        <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
     </body>
 </html>

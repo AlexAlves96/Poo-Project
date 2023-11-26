@@ -60,7 +60,7 @@
         <%@include file="WEB-INF/jspf/css.jspf" %>
     </head>
     <body>
-        <jsp:include page="header.jsp" />
+        <%@include file="WEB-INF/jspf/navbar.jspf" %>
         <div class="container">
             <div class="row">
                 <div class="col-12 d-flex justify-content-center align-items-center">
