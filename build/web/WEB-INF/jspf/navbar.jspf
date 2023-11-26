@@ -59,7 +59,7 @@
                 </li>
                 <% if ("raziel".equals(username)) { %>
                     <li class="nav-item">
-                        <a class="nav-link" href="delete-posts.jsp">Remover todos os posts</a>
+                        <a class="nav-link text-white" href="delete-posts.jsp">Remover todos os posts</a>
                     </li>
                     <% } %>
                 <% } %>
