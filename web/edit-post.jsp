@@ -94,6 +94,7 @@
                 }
             }
         %>
+        <%@include file="WEB-INF/jspf/footer.jspf" %>
         <%@include file="WEB-INF/jspf/scripts.jspf" %>
         <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
     </body>

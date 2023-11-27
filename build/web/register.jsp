@@ -40,7 +40,7 @@
         <%@include file="WEB-INF/jspf/css.jspf" %>
     </head>
     <body>
-         <%@include file="WEB-INF/jspf/navbar.jspf" %>
+        <%@include file="WEB-INF/jspf/navbar.jspf" %>
         <div tabindex="-1">
             <h1> <% out.print(execao);%></h1>
             <form class=" register row g-3" method="post">
@@ -49,7 +49,7 @@
                     <input type="text" class="form-control" id="inputName" name="inputName" required>
                 </div>
                 <div class="col-md-6">
-                    <label for="inputLastname4" class="form-label">Sobreome:</label>
+                    <label for="inputLastname4" class="form-label">Sobrenome:</label>
                     <input type="text" class="form-control" id="inputLastname" name="inputLastname"required>
                 </div>
                 <div class="col-12">
@@ -71,6 +71,7 @@
                 </div>
             </form>
         </div>
+        <%@include file="WEB-INF/jspf/footer.jspf" %>
         <%@include file="WEB-INF/jspf/scripts.jspf" %>
         <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
     </body>

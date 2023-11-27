@@ -69,18 +69,15 @@
                             <label class="form-label">Titulo:</label>
                             <input class="form-control" type="text" name="title" id="title" required><br>
                             <label class="form-label" for="content">Conteúdo:</label>
-                            <textarea class="form-control" name="content" id="content" rows="4" required style="resize: none"></textarea><br>     
-                            <% if ("raziel".equals(username)) { %>
+                            <textarea class="form-control" name="content" id="content" rows="4" required style="resize: none"></textarea><br>                        
                             <input class="btn btn-primary" id="btn-add-post" type="submit" value="Adicionar Postagem">
-                            <% } else {%>
-                            <p>Você não tem autorização para postar!</p>
-                            <% }%>
                         </form>
                         <p id="date-post"></p>
                     </div>
                 </div>
             </div>
         </div>
+        <%@include file="WEB-INF/jspf/footer.jspf" %>
         <%@include file="WEB-INF/jspf/scripts.jspf" %>
         <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
     </body>

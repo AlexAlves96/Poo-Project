@@ -16,11 +16,15 @@
     function changetheme() {
 
         const navbar = document.getElementById('navbar');
+        const footer = document.getElementById('footer');
         if (a === 0) {
             a++;
             navbar.addEventListener("click", (event) => {
                 navbar.classList.remove("navDim");
                 navbar.classList.add("bg-dark");
+                
+                footer.classList.remove("footer-light");
+                footer.classList.add("footer-dark");
                 
                document.body.style.backgroundColor = '#737889'; 
             });
@@ -29,6 +33,10 @@
             navbar.addEventListener("click", (event) => {
                 navbar.classList.remove("bg-dark");
                 navbar.classList.add("navDim");       
+                
+                 footer.classList.remove("footer-dark");
+                footer.classList.add("footer-light");
+                
                 
                 document.body.style.backgroundColor = '#4173ff'; 
             });

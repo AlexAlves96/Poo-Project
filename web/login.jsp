@@ -16,7 +16,7 @@
         <%@include file="WEB-INF/jspf/css.jspf" %>
     </head>
     <body>
-         <%@include file="WEB-INF/jspf/navbar.jspf" %>
+        <%@include file="WEB-INF/jspf/navbar.jspf" %>
         <div class="form-container">
             <div class="form-box">
                 <form class="row g-3" method="post" action="LoginServlet">
@@ -35,7 +35,7 @@
                 </form>
             </div>
         </div>
-
+        <%@include file="WEB-INF/jspf/footer.jspf" %>
         <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
     </body>
 </html>
