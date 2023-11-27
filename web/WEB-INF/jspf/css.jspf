@@ -186,11 +186,10 @@
     }
 
     .index-content {
-        background-color: white;
+        background-color: #f3f3f3;
         text-align: left;
         width: 80vh; /* Ajuste o tamanho conforme desejado */
         padding: 25px; /* Adicionando um preenchimento interno ao conteúdo */
-        background-color: whitesmoke;
     }
 
     .post-title{
@@ -214,11 +213,18 @@
         
     }
     .view-post-container{
-        background-color: white;
+        background-color: #f3f3f3;
         margin-left: 300px;
         margin-right: 300px;
-        padding: 20px;
-        
+        padding-left: 20px;
+        padding-right: 20px;
+       padding-bottom: 10px;
+        padding-top: 10px;
+        border-radius: 20px; 
+        text-align: left;
+    }
+    .view-post-tittle{
+        text-align: center;
     }
 
     /* edit-post.jsp */

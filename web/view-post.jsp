@@ -48,7 +48,10 @@
                 <p class="view-post">Autor: <%= author%></p>
                 <p class="view-post" id="date-post"> Publicado em: <%= datePublished%></p>
             </div>
-                <h2 class="view-post"> <%= title%></h2>
+            <div class="view-post-tittle">
+               <h2 class="view-post"> <%= title%></h2> 
+            </div>       
+            <hr>
             <p class="view-post"><%= content%></p>
         </div>
     </div>
