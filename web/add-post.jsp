@@ -16,7 +16,7 @@
         if (request.getMethod().equalsIgnoreCase("POST")) {
             String title = request.getParameter("title");
             String content = request.getParameter("content");
-            
+
             // Obtem a data atual do sistema
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String datePublished = sdf.format(new Date());
@@ -69,8 +69,12 @@
                             <label class="form-label">Titulo:</label>
                             <input class="form-control" type="text" name="title" id="title" required><br>
                             <label class="form-label" for="content">Conteúdo:</label>
-                            <textarea class="form-control" name="content" id="content" rows="4" required style="resize: none"></textarea><br>                        
+                            <textarea class="form-control" name="content" id="content" rows="4" required style="resize: none"></textarea><br>     
+                            <% if ("raziel".equals(username)) { %>
                             <input class="btn btn-primary" id="btn-add-post" type="submit" value="Adicionar Postagem">
+                            <% } else {%>
+                            <p>Você não tem autorização para postar!</p>
+                            <% }%>
                         </form>
                         <p id="date-post"></p>
                     </div>

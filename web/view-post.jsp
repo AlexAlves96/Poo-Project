@@ -4,34 +4,84 @@
     Author     : Anizawa
 --%>
 
+<%@ page import="java.sql.Connection, java.sql.PreparedStatement, java.sql.DriverManager, java.sql.ResultSet, java.sql.SQLException" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="minhasClasses.PostDataBean" %>
-<%@ page import="minhasClasses.Post" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Visualizar postagem</title>
+    <%@include file="WEB-INF/jspf/html-head-libs.jspf" %>
+    <%@include file="WEB-INF/jspf/css.jspf" %>
 </head>
 <body>
-    <h1>Visualizar postagem</h1>
+    <%@include file="WEB-INF/jspf/navbar.jspf" %>
+    <% 
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
 
-    <%
-        int id = Integer.parseInt(request.getParameter("id"));
-        PostDataBean dataBean = new PostDataBean();
-        Post post = dataBean.getPostById(id);
+        try {
+            Class.forName("org.sqlite.JDBC");
+            connection = DriverManager.getConnection("jdbc:sqlite:database.db");
 
-        if (post != null) {
+            String createTableQuery = "CREATE TABLE IF NOT EXISTS posts (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, content TEXT, date_published TEXT, author TEXT)";
+            statement = connection.prepareStatement(createTableQuery);
+            statement.execute();
+
+            int postId = Integer.parseInt(request.getParameter("id"));
+
+            statement = connection.prepareStatement("SELECT * FROM posts WHERE id = ?");
+            statement.setInt(1, postId);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                String title = resultSet.getString("title");
+                String content = resultSet.getString("content");
+                String datePublished = resultSet.getString("date_published");
+                String author = resultSet.getString("author");
     %>
 
-    <h2><%= post.getTitle() %></h2>
-    <p><%= post.getContent() %></p>
+    <div class="view-post-container">
+        <div class="post-content">
+            <div class="info-post">
+                <p class="view-post">Autor: <%= author%></p>
+                <p class="view-post" id="date-post"> Publicado em: <%= datePublished%></p>
+            </div>
+                <h2 class="view-post"> <%= title%></h2>
+            <p class="view-post"><%= content%></p>
+        </div>
+    </div>
 
-    <%
+        
+    
+
+    <% 
         } else {
-            response.sendError(404, "Postagem não encontrada");
+            out.println("Post não encontrado.");
         }
+    } catch (SQLException | ClassNotFoundException | NumberFormatException e) {
+        e.printStackTrace();
+        response.sendRedirect("/Projeto/errorPage.jsp");
+    } finally {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     %>
-
+    
+    <%@include file="WEB-INF/jspf/footer.jspf" %>
+    <%@include file="WEB-INF/jspf/scripts.jspf" %>
+    <%@include file="WEB-INF/jspf/html-body-libs.jspf" %>
 </body>
 </html>

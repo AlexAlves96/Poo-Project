@@ -23,7 +23,7 @@
                 connection = DriverManager.getConnection("jdbc:sqlite:database.db");
 
                 // Consulta para selecionar todos os posts
-                statement = connection.prepareStatement("SELECT * FROM posts");
+                statement = connection.prepareStatement("SELECT * FROM posts ORDER BY date_published DESC");
                 resultSet = statement.executeQuery();
 
                 while (resultSet.next()) {
@@ -32,6 +32,7 @@
                     String content = resultSet.getString("content");
                     String datePublished = resultSet.getString("date_published");
                     String author = resultSet.getString("author");
+                    String sessionUsername = (String) session.getAttribute("username");
         %>
 
         <div class="index-container">
@@ -41,13 +42,16 @@
                         <p>Autor: <%= author%></p>  
                         <p id="date-post"> Publicado em: <%= datePublished%></p>
                     </div>
-                    <h2> <%= title%></h2>
+                        <h3> <%= title%></h3>
                 </div>
                 <div class="post-content">
                     <p><%= content%></p> 
                 </div>
                 <% if (content != null) {%>
+                <a href="view-post.jsp?id=<%= postId%>">Ver Post Completo</a><br>
+                <% if ("raziel".equals(sessionUsername)) { %>
                 <a href="edit-post.jsp?id=<%= postId%>">Editar Post</a>
+                <% } %>
                 <% } %>
                 <hr>
             </div>
